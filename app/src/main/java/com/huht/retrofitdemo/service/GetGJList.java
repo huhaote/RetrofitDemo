@@ -1,4 +1,6 @@
-package com.huht.retrofitdemo;
+package com.huht.retrofitdemo.service;
+
+import com.huht.retrofitdemo.bean.Id;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

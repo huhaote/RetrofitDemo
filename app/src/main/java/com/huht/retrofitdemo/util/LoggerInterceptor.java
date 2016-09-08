@@ -1,4 +1,4 @@
-package com.huht.retrofitdemo;
+package com.huht.retrofitdemo.util;
 
 import android.text.TextUtils;
 import android.util.Log;

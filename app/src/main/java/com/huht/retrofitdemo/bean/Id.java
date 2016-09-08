@@ -1,4 +1,4 @@
-package com.huht.retrofitdemo;
+package com.huht.retrofitdemo.bean;
 
 /**
  * Created by huht on 2016/9/8.
