@@ -1,13 +1,17 @@
-/*
 package com.huht.retrofitdemo.util;
+
+import android.os.Environment;
+
+import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 
-*
- * Created by huht on 2016/9/8.
 
-
+/**
+ * Created by huht on 2016/9/7.
+ */
 public enum OKHttpFactory {
 
     INSTANCE;
@@ -17,31 +21,25 @@ public enum OKHttpFactory {
     private static final int TIMEOUT_READ = 25;
     private static final int TIMEOUT_CONNECTION = 25;
 
+
     OKHttpFactory() {
         //打印请求Log
         LoggerInterceptor interceptor = new LoggerInterceptor("huht");
 
         //缓存目录
-        Cache cache = new Cache(MyApplication.mContext.getCacheDir(), 10 * 1024 * 1024);
+        Cache cache = new Cache(new File(Environment.getExternalStorageDirectory()+"/cache/"), 10 * 1024 * 1024);
 
         okHttpClient = new OkHttpClient.Builder()
-                //打印请求log
-                .addInterceptor(interceptor)
-
-                //stetho,可以在chrome中查看请求
-                .addNetworkInterceptor(new StethoInterceptor())
 
                 //添加UA
-                .addInterceptor(new UserAgentInterceptor(HttpHelper.getUse
-
-rAgent()))
-
+                //.addInterceptor(new UserAgentInterceptor(HttpHelper.getUserAgent()))
                 //必须是设置Cache目录
                 .cache(cache)
-
                 //走缓存，两个都要设置
-                .addInterceptor(new OnOffLineCachedInterceptor())
-                .addNetworkInterceptor(new OnOffLineCachedInterceptor())
+                .addInterceptor(new AllCachedInterceptor())
+                .addNetworkInterceptor(new AllCachedInterceptor())
+                //打印请求log
+                .addInterceptor(interceptor)
 
                 //失败重连
                 .retryOnConnectionFailure(true)
@@ -56,6 +54,5 @@ rAgent()))
     public OkHttpClient getOkHttpClient() {
         return okHttpClient;
     }
+
 }
-}
-*/

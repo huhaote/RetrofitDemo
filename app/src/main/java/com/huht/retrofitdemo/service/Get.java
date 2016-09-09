@@ -9,8 +9,8 @@ import retrofit2.http.Query;
 /**
  * Created by huht on 2016/9/7.
  */
-public interface GetGJList {
+public interface Get {
     @GET("param")
-    Call<Id> contributors(
+    Call<Id> get(
             @Query("id") String id);
 }
